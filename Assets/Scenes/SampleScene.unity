@@ -258,6 +258,10 @@ MonoBehaviour:
   right: 100
   moveSpeed: 3
   maxSpeed: 20
+  turnSpeed: 1000
+  sensitivity: 5
+  smoothing: 2
+  character: {fileID: 773260797}
 --- !u!54 &773260799
 Rigidbody:
   m_ObjectHideFlags: 0

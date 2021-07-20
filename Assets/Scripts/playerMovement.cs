@@ -13,6 +13,7 @@ public class playerMovement : MonoBehaviour
     [SerializeField]
     private Rigidbody rb;
 
+
     [SerializeField]
     private KeyCode forward = KeyCode.W;
     [SerializeField]
@@ -25,12 +26,28 @@ public class playerMovement : MonoBehaviour
     private float moveSpeed;
     [SerializeField]
     private float maxSpeed;
+    [SerializeField]
+    private float turnSpeed;
+
+    [SerializeField]
+    public float sensitivity = 5.0f;
+    [SerializeField]
+    public float smoothing = 2.0f;
+    // the chacter is the capsule
+    public GameObject character;
+    // get the incremental value of mouse moving
+    private Vector2 mouseLook;
+    // smooth the mouse moving
+    private Vector2 smoothV;
+
+    float initialAngle;
 
 
     // Start is called before the first frame update
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
+        initialAngle = character.transform.localEulerAngles.y;
     }
 
     void LateUpdate()
@@ -83,6 +100,21 @@ public class playerMovement : MonoBehaviour
         {
             rb.velocity = Vector3.ClampMagnitude(rb.velocity, maxSpeed);
         }
+
+
+
+        // md is mosue delta
+        var md = new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
+        md = Vector2.Scale(md, new Vector2(sensitivity * smoothing, sensitivity * smoothing));
+        // the interpolated float result between the two float values
+        smoothV.x = Mathf.Lerp(smoothV.x, md.x, 1f / smoothing);
+        smoothV.y = Mathf.Lerp(smoothV.y, md.y, 1f / smoothing);
+        // incrementally add to the camera look
+        mouseLook += smoothV;
+
+        // vector3.right means the x-axis
+        transform.localRotation = Quaternion.AngleAxis(-mouseLook.y, Vector3.right);
+        character.transform.localRotation = Quaternion.AngleAxis(initialAngle + mouseLook.x, Vector3.up);
 
     }
 }
