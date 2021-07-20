@@ -5,7 +5,7 @@ using UnityEngine;
 public class playerMovement : MonoBehaviour
 {
     public float jumpForce = 600.0f;
-    public float maxGroundDistance = 1.5f;
+    public float maxGroundDistance = 1.51f;
     private bool isGrounded;
     public bool allowDoubleJump = true;
     private int amountOfJumps = 2;
@@ -86,4 +86,4 @@ public class playerMovement : MonoBehaviour
 
     }
 }
-}
+
