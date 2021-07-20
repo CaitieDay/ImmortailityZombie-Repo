@@ -97,6 +97,7 @@ GameObject:
   - component: {fileID: 4221867655656133997}
   - component: {fileID: 4221867655656134290}
   - component: {fileID: 4221867655656134291}
+  - component: {fileID: 4019791207667937194}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -220,7 +221,23 @@ MonoBehaviour:
   right: 100
   moveSpeed: 3
   maxSpeed: 20
-  turnSpeed: 1000
+  boostedJump: 0
   sensitivity: 5
   smoothing: 2
   character: {fileID: 4221867655656134288}
+--- !u!114 &4019791207667937194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4221867655656134288}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8fd3f27a08f5044a9547f4d08cc5212, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
+  timer: 0
+  painTimer: 0
+  playerDead: {fileID: 187589265714550769, guid: a7b0415e8757fc049b89737c477625de, type: 3}

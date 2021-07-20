@@ -8,8 +8,9 @@ public class PlayerDamage : MonoBehaviour
     public float health = 100.0f;
     public float timer = 0.0f;
     GameObject LevelManager;
-    public GameObject painEffect;
     public float painTimer = 0.0f;
+    [SerializeField]
+    private GameObject playerDead;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,9 +20,10 @@ public class PlayerDamage : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(health <= 0)
+        if (health == 0)
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            Instantiate(playerDead, new Vector3 (this.transform.position.x, this.transform.position.y + 1, this.transform.position.z), this.transform.rotation);
+            reset();
         }
     }
 
@@ -29,19 +31,13 @@ public class PlayerDamage : MonoBehaviour
     {
         if (collision.gameObject.tag == "Enemy")
         {
-            timer = timer + Time.deltaTime;
-            painTimer = painTimer - Time.deltaTime;
-            if (timer >= 0.05)
-            {
-                health = health - 1 * LevelManager.GetComponent<LevelManager>().damageMultiplyer;
-                timer = 0.0f;
-            }
-
-            if (painTimer <= 0.0)
-            {
-                Instantiate(painEffect, transform.position, Quaternion.identity);
-                painTimer = 1.0f;
-            }
+            health--;
         }
+    }
+
+    private void reset()
+    {
+        health = 10;
+        this.transform.position = new Vector3(-4, 5, 4);
     }
 }
