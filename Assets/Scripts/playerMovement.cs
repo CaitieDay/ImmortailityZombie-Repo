@@ -25,9 +25,10 @@ public class playerMovement : MonoBehaviour
     [SerializeField]
     private float moveSpeed;
     [SerializeField]
-    private float maxSpeed;
+    private float maxSpeed;    
     [SerializeField]
-    private float turnSpeed;
+    private float boostedJump;
+
 
     [SerializeField]
     public float sensitivity = 5.0f;
@@ -72,11 +73,11 @@ public class playerMovement : MonoBehaviour
         }
         if (Input.GetKey(left))
         {
-            rb.AddForce(-transform.right * moveSpeed / 4);
+            rb.AddForce(-transform.right * moveSpeed / 2);
         }
         if (Input.GetKey(right))
         {
-            rb.AddForce(transform.right * moveSpeed / 4);
+            rb.AddForce(transform.right * moveSpeed / 2);
         }
 
         if (Input.GetKeyDown("space"))
